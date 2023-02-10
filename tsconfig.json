@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "strict": true,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "declaration": true,
+        "declarationDir": "types",
+        "lib": [
+            "esnext",
+        ],
+    },
+    "include": [
+        "src",
+        "index.ts",
+    ],
+    "exclude": [
+        "test",
+    ],
+}

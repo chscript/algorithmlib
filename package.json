@@ -1,0 +1,72 @@
+{
+  "name": "algorithmlib",
+  "version": "2.0.3",
+  "description": "Data Structure & Algorithm library written with Typescript",
+  "type": "module",
+  "types": "dist/types/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "unpkg": "dist/index.iife.js",
+  "jsdelivr": "dist/index.iife.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage && rimraf ./coverage",
+    "build": "rimraf ./dist/* && rollup --config && rimraf ./dist/types/src",
+    "lint": "eslint ./{src,test,dist,scripts,*.[tj]s,*.cjs,*.mjs}",
+    "format": "prettier ./{src,test,dist,scripts,*.[tj]s,*.[cm]js} --parser=typescript --write",
+    "lint-staged": "npm run build && npm run lint && npm run format",
+    "release": "node ./scripts/release.js",
+    "publish": "npm publish",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "javascript",
+    "data structure",
+    "algorithm"
+  ],
+  "author": "Steve Yang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chscript/algorithmlib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chscript/algorithmlib/issues"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs}": [
+      "eslint",
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.50.0",
+    "@vitest/coverage-c8": "^0.27.1",
+    "eslint": "^8.33.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.3",
+    "rimraf": "^4.0.7",
+    "rollup": "^3.12.1",
+    "rollup-plugin-dts": "^5.1.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.1",
+    "vitest": "^0.27.1"
+  }
+}
