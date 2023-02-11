@@ -3,8 +3,8 @@
 <p align="center" >
 <img  src="https://img.shields.io/badge/build-passing-brightgreen" />
 <img  src="https://img.shields.io/badge/coverage-94%25-green" />
-<img  src="https://img.shields.io/badge/npm-v2.0.3-blue" />
-<img  src="https://img.shields.io/badge/cdnjs-v2.0.3-blue" />
+<img  src="https://img.shields.io/badge/npm-v2.0.4-blue" />
+<img  src="https://img.shields.io/badge/cdnjs-v2.0.4-blue" />
 <img  src="https://img.shields.io/badge/downloads-200+-brightgreen" />
 <img  src="https://img.shields.io/badge/License-MIT-green" />
 </p>
@@ -114,7 +114,7 @@ a.pop()
 - inOrderTraversal: \<T>(tree: BinarySearchTree\<T>) => { index: number; element: T }[]
 - levelOrderTraversal: \<T>(tree: BinarySearchTree\<T>) => { index: number; element: T }\[][]
 
-**Graph\<T extends string>**
+**Graph\<K>**
 
 - addVertex(...vertices: K[]): Graph\<K>
 - addEdge(v: K, edges: Array<[K, number | null]>): Graph\<K>
