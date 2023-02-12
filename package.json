@@ -20,12 +20,12 @@
   ],
   "scripts": {
     "test": "vitest",
-    "coverage": "vitest run --coverage && rimraf ./coverage",
+    "test:coverage": "vitest run --coverage && rimraf ./coverage",
     "build": "rimraf ./dist/* && rollup --config && rimraf ./dist/types/src",
     "lint": "eslint ./{src,test,dist,scripts,*.[tj]s,*.cjs,*.mjs}",
     "format": "prettier ./{src,test,dist,scripts,*.[tj]s,*.[cm]js} --parser=typescript --write",
     "lint-staged": "npm run build && npm run lint && npm run format",
-    "release": "node ./scripts/release.js",
+    "release": "npm run lint-staged && node ./scripts/release.js",
     "publish": "npm publish",
     "prepare": "husky install"
   },
