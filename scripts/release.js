@@ -8,13 +8,21 @@ const READMEs = ['./README.md', './README_zh.md']
 const versionRegExp =
     /(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?/g
 
-function UpdateVersion(versionNumber, readmeDocument, labelColor) {
-    fs.readFile(readmeDocument, 'utf-8', (err, data) => {
-        if (err) {
-            throw err
-        }
+function read(path) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(path, 'utf-8', (err, data) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(data)
+        })
+    })
+}
+
+function write(path, data, versionNumber, labelColor) {
+    return new Promise((resolve, reject) => {
         fs.writeFile(
-            readmeDocument,
+            path,
             data.replace(
                 versionRegExp,
                 versionNumber.replace('-', '--') + labelColor
@@ -22,13 +30,19 @@ function UpdateVersion(versionNumber, readmeDocument, labelColor) {
             'utf-8',
             err => {
                 if (err) {
-                    throw err
+                    reject(err)
                 }
+                resolve()
             }
         )
     })
 }
 
+async function UpdateVersion(path, versionNumber, labelColor) {
+    const data = await read(path)
+    await write(path, data, versionNumber, labelColor)
+}
+
 READMEs.forEach(readme => {
-    UpdateVersion(npm.version, readme, '-blue')
+    UpdateVersion(readme, npm.version, '-blue')
 })

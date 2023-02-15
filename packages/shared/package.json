@@ -1,0 +1,16 @@
+{
+  "name": "@algorithmlib/shared",
+  "version": "1.0.0",
+  "description": "tools for algorithmlib",
+  "main": "index.ts",
+  "type": "module",
+  "keywords": [
+    "tools"
+  ],
+  "author": "Steve Yang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chscript/algorithmlib/issues"
+  },
+  "devDependencies": {}
+}

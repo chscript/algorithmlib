@@ -1,0 +1,16 @@
+{
+  "name": "@algorithmlib/data-structures",
+  "version": "1.0.0",
+  "description": "data-structures for algorithmlib",
+  "main": "index.ts",
+  "type": "module",
+  "keywords": [
+    "data-structures"
+  ],
+  "author": "Steve Yang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chscript/algorithmlib/issues"
+  },
+  "devDependencies": {}
+}

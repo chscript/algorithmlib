@@ -21,9 +21,9 @@
   "scripts": {
     "test": "vitest",
     "test:coverage": "vitest run --coverage && rimraf ./coverage",
-    "build": "rimraf ./dist/* && rollup --config && rimraf ./dist/types/src",
-    "lint": "eslint ./{src,test,dist,scripts,*.[tj]s,*.cjs,*.mjs}",
-    "format": "prettier ./{src,test,dist,scripts,*.[tj]s,*.[cm]js} --parser=typescript --write",
+    "build": "rimraf ./dist/{*.[cm]js,*.js} && rollup --config",
+    "lint": "eslint ./{dist,packages/*/{src,index.ts},scripts,*.[cm]js}",
+    "format": "prettier ./{dist,packages/*/{src,index.ts},scripts,*.[cm]js} --parser=typescript --write",
     "lint-staged": "npm run build && npm run lint && npm run format",
     "release": "npm run lint-staged && node ./scripts/release.js",
     "publish": "npm publish",
@@ -44,7 +44,7 @@
     "url": "https://github.com/chscript/algorithmlib/issues"
   },
   "lint-staged": {
-    "*.{js,ts,cjs,mjs}": [
+    "*.{[tj]s,[cm]js}": [
       "eslint",
       "prettier --parser=typescript --write"
     ]
@@ -52,6 +52,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
+    "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
@@ -68,5 +69,9 @@
     "typescript": "^4.9.5",
     "vite": "^4.1.1",
     "vitest": "^0.27.1"
+  },
+  "dependencies": {
+    "@algorithmlib/algorithms": "workspace:^1.0.0",
+    "@algorithmlib/data-structures": "workspace:^1.0.0"
   }
 }

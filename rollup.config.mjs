@@ -1,6 +1,7 @@
-// import resolve from '@rollup/plugin-node-resolve';
+// import resolve from '@rollup/plugin-node-resolve'
+// import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
-import dts from 'rollup-plugin-dts'
+// import dts from 'rollup-plugin-dts'
 export default [
     {
         input: 'index.ts',
@@ -21,20 +22,21 @@ export default [
         ],
         plugins: [
             // resolve(),
+            // commonjs(),
             typescript({
                 tsconfig: 'tsconfig.json'
             })
         ]
-    },
-    {
-        // 声明文件合并
-        input: 'dist/types/index.d.ts',
-        output: [
-            {
-                file: 'dist/types/index.d.ts',
-                format: 'es'
-            }
-        ],
-        plugins: [dts()]
     }
+    // {
+    //     // 类型声明文件合并
+    //     input: 'dist/types/index.d.ts',
+    //     output: [
+    //         {
+    //             file: 'dist/types/index.d.ts',
+    //             format: 'es'
+    //         }
+    //     ],
+    //     plugins: [dts()]
+    // }
 ]

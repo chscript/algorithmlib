@@ -1,6 +1,8 @@
 'use strict'
 
 class Stack {
+    length
+    stack
     constructor() {
         this.length = 0
         this.stack = []
@@ -23,6 +25,8 @@ class Stack {
 }
 
 class Queue {
+    length
+    queue
     constructor() {
         this.length = 0
         this.queue = []
@@ -45,12 +49,16 @@ class Queue {
 }
 
 class LinkedListNode {
+    element
+    next
     constructor(element) {
         this.element = element
         this.next = null
     }
 }
 class LinkedList {
+    length
+    head
     constructor() {
         this.length = 0
         this.head = null
@@ -134,12 +142,16 @@ function HashCode(str) {
         : 0
 }
 class keyValuePair {
+    key
+    value
     constructor(key, value) {
         this.key = key
         this.value = value
     }
 }
 class HashTable {
+    length
+    table
     constructor() {
         this.length = 0
         this.table = {}
@@ -189,6 +201,10 @@ class HashTable {
 }
 
 class BinarySearchTreeNode {
+    index
+    element
+    left
+    right
     constructor(index, element) {
         this.index = index
         this.element = element
@@ -197,6 +213,8 @@ class BinarySearchTreeNode {
     }
 }
 class BinarySearchTree {
+    length
+    root
     constructor() {
         this.length = 0
         this.root = null
@@ -304,6 +322,57 @@ class BinarySearchTree {
     }
 }
 
+class Graph {
+    length
+    vertices
+    isDirected
+    constructor(isDirected = false) {
+        this.length = 0
+        this.vertices = new Map()
+        this.isDirected = isDirected
+    }
+    addVertex(...vertices) {
+        vertices.forEach(key => {
+            this.vertices.set(key, new Map())
+            this.length++
+        })
+        return this
+    }
+    addEdge(v, edges) {
+        if (!this.vertices.get(v)) {
+            this.addVertex(v)
+        }
+        for (const key of edges) {
+            if (!this.vertices.get(key[0])) {
+                this.addVertex(key[0])
+            }
+            this.vertices.get(v).set(key[0], key[1])
+            if (!this.isDirected) {
+                this.vertices.get(key[0]).set(v, key[1])
+            }
+        }
+        return this
+    }
+    removeVertex(v) {
+        this.vertices.delete(v)
+        for (const key of this.vertices.keys()) {
+            this.vertices.get(key).delete(v)
+        }
+        this.length--
+        return this
+    }
+    removeEdge(v, w) {
+        this.vertices.get(v).delete(w)
+        if (!this.isDirected) {
+            this.vertices.get(w).delete(v)
+        }
+        return this
+    }
+    isEmpty() {
+        return this.length === 0
+    }
+}
+
 const preOrderTraversal = tree => {
     const result = []
     const stack = new Stack()
@@ -384,54 +453,6 @@ const levelOrderTraversal = tree => {
     return result
 }
 
-class Graph {
-    constructor(isDirected = false) {
-        this.length = 0
-        this.vertices = new Map()
-        this.isDirected = isDirected
-    }
-    addVertex(...vertices) {
-        vertices.forEach(key => {
-            this.vertices.set(key, new Map())
-            this.length++
-        })
-        return this
-    }
-    addEdge(v, edges) {
-        if (!this.vertices.get(v)) {
-            this.addVertex(v)
-        }
-        for (const key of edges) {
-            if (!this.vertices.get(key[0])) {
-                this.addVertex(key[0])
-            }
-            this.vertices.get(v).set(key[0], key[1])
-            if (!this.isDirected) {
-                this.vertices.get(key[0]).set(v, key[1])
-            }
-        }
-        return this
-    }
-    removeVertex(v) {
-        this.vertices.delete(v)
-        for (const key of this.vertices.keys()) {
-            this.vertices.get(key).delete(v)
-        }
-        this.length--
-        return this
-    }
-    removeEdge(v, w) {
-        this.vertices.get(v).delete(w)
-        if (!this.isDirected) {
-            this.vertices.get(w).delete(v)
-        }
-        return this
-    }
-    isEmpty() {
-        return this.length === 0
-    }
-}
-
 const initColor = vertices => {
     const color = new Map()
     for (const key of vertices.keys()) {
@@ -488,6 +509,11 @@ const depthFirstSearch = (graph, startVertex) => {
 
 const defaultCompare = (a, b) => {
     return a.toString().charCodeAt(0) - b.toString().charCodeAt(0)
+}
+const isObject = (obj, key) => {
+    return (
+        obj !== null && typeof obj === 'object' && typeof obj[key] === 'number'
+    )
 }
 
 function bubbleSort(array, compare = defaultCompare) {
@@ -580,11 +606,6 @@ function mergeSort(array, compare = defaultCompare) {
     return array
 }
 
-function isObject(obj, key) {
-    return (
-        obj !== null && typeof obj === 'object' && typeof obj[key] === 'number'
-    )
-}
 function binarySearch(array, target) {
     const key = Object.keys(target)[0]
     const bool = isObject(target, key)
